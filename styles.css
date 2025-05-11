@@ -1,0 +1,628 @@
+:root {
+    --color-primary: #d9c5b2;
+    --color-secondary: #8a785d;
+    --color-accent: #c7a17e;
+    --color-dark: #4a453f;
+    --color-light: #f9f7f4;
+    --color-gold: #d4af37;
+    --color-envelope: #f0e5d8;
+    --color-envelope-accent: #b89a75;
+    --transition-main: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --shadow-main: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.15);
+    --border-radius: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to bottom, var(--color-light), #f0e9e2);
+    color: var(--color-dark);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.03" viewBox="0 0 100 100"><path fill="%238a785d" d="M30,10 Q50,0 70,10 Q90,20 90,50 Q90,80 70,90 Q50,100 30,90 Q10,80 10,50 Q10,20 30,10 Z"/></svg>');
+    background-size: 300px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Languages Selector */
+.language-selector {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 30px;
+    padding: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: var(--transition-main);
+}
+
+.language-selector button {
+    background: transparent;
+    border: 1px solid var(--color-accent);
+    color: var(--color-dark);
+    padding: 8px 15px;
+    margin: 0 3px;
+    cursor: pointer;
+    transition: var(--transition-main);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    border-radius: 20px;
+}
+
+.language-selector button:hover,
+.language-selector button.active {
+    background-color: var(--color-accent);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Modern Envelope Styles */
+.envelope-container {
+    position: relative;
+    width: 320px;
+    height: 220px;
+    margin: 0 auto 3rem;
+    perspective: 1200px;
+    cursor: pointer;
+    transition: var(--transition-main);
+}
+
+.envelope-container:hover {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.envelope {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.envelope.opened {
+    transform: rotateX(180deg);
+}
+
+.envelope-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--color-envelope);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    border: 2px solid var(--color-envelope-accent);
+    overflow: hidden;
+}
+
+.envelope-front::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at top right, rgba(255,255,255,0.3), rgba(255,255,255,0) 70%);
+    pointer-events: none;
+}
+
+.envelope-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--color-envelope-accent);
+    border-radius: var(--border-radius);
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-secondary);
+    box-shadow: var(--shadow-main);
+}
+
+.flap {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-bottom: 110px solid var(--color-envelope-accent);
+    z-index: 2;
+    transform-origin: top;
+    transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+}
+
+.envelope.opened .flap {
+    transform: translateX(-50%) rotateX(180deg);
+}
+
+.envelope-text {
+    font-family: 'Dancing Script', cursive;
+    color: var(--color-accent);
+    font-size: 1.8rem;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.envelope-stamp {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 60px;
+    height: 70px;
+    background: var(--color-light);
+    border: 1px dashed var(--color-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    color: var(--color-dark);
+    text-align: center;
+    line-height: 1.2;
+    transform: rotate(8deg);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    transition: var(--transition-main);
+}
+
+.envelope-stamp:hover {
+    transform: rotate(0deg) scale(1.1);
+}
+
+/* Invitation Content */
+.invitation-container, .story-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-main);
+    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0;
+    transform: translateY(30px);
+    border: 1px solid rgba(199, 161, 126, 0.3);
+}
+
+.invitation-container.visible, .story-container.visible {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.invitation-image {
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow-main);
+    border-radius: var(--border-radius);
+    transition: var(--transition-main);
+}
+
+.invitation-image:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-hover);
+}
+
+.invitation-text, .story-text {
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    font-size: 1.2rem;
+    color: var(--color-dark);
+    max-width: 650px;
+    position: relative;
+    padding: 0 20px;
+}
+
+.invitation-text::before, .invitation-text::after,
+.story-text::before, .story-text::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.invitation-text::before, .story-text::before {
+    top: -15px;
+}
+
+.invitation-text::after, .story-text::after {
+    bottom: -15px;
+}
+
+/* Zoom Details Styling */
+.zoom-details {
+    background-color: rgba(242, 239, 234, 0.7);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 1rem 0 2rem;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px dashed var(--color-accent);
+}
+
+.zoom-details h3 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.zoom-link {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.zoom-link a {
+    display: inline-block;
+    color: var(--color-dark);
+    background-color: var(--color-accent);
+    color: white;
+    text-decoration: none;
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin-left: 5px;
+    transition: var(--transition-main);
+}
+
+.zoom-link a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.zoom-details-text {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.zoom-link.backup {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+.button {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--color-dark);
+    padding: 12px 40px;
+    border: 2px solid var(--color-accent);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: var(--transition-main);
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 30px;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: var(--color-accent);
+    transition: width 0.4s ease;
+    z-index: -1;
+}
+
+.button:hover {
+    color: white;
+    box-shadow: 0 5px 15px rgba(199, 161, 126, 0.4);
+    transform: translateY(-3px);
+}
+
+.button:hover::before {
+    width: 100%;
+}
+
+/* Story Section */
+.story-container {
+    margin-top: 4rem;
+}
+
+.story-text {
+    font-style: italic;
+    font-size: 1.3rem;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.story-text::first-letter {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    float: left;
+    line-height: 1;
+    padding-right: 10px;
+    font-style: normal;
+}
+
+.photo-frame {
+    border: 15px solid white;
+    box-shadow: var(--shadow-main);
+    position: relative;
+    transform: rotate(-2deg);
+    transition: var(--transition-main);
+    overflow: hidden;
+    margin: 2.5rem 0;
+}
+
+.photo-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.photo-frame:hover {
+    transform: rotate(0deg) scale(1.03);
+    box-shadow: var(--shadow-hover);
+}
+
+.photo-collage {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    transition: var(--transition-main);
+}
+
+.signature {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    transform: rotate(-3deg);
+}
+
+.music-control {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background: linear-gradient(135deg, var(--color-accent), #b89a75);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-main);
+    z-index: 100;
+    font-size: 1.4rem;
+    transition: var(--transition-main);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.music-control:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+    50% { transform: scale(1.03); box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15); }
+    100% { transform: scale(1); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+}
+
+.pulse {
+    animation: pulse 2s infinite cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px) rotate(-2deg); }
+    50% { transform: translateY(-10px) rotate(0deg); }
+    100% { transform: translateY(0px) rotate(-2deg); }
+}
+
+.photo-frame {
+    animation: floating 5s infinite ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    .envelope-container {
+        width: 280px;
+        height: 190px;
+    }
+    
+    .flap {
+        border-left: 140px solid transparent;
+        border-right: 140px solid transparent;
+        border-bottom: 90px solid var(--color-envelope-accent);
+    }
+    
+    .invitation-container, .story-container {
+        padding: 2rem;
+    }
+    
+    .invitation-text, .story-text {
+        font-size: 1.1rem;
+    }
+    
+    .signature {
+        font-size: 1.3rem;
+    }
+    
+    .zoom-details {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .envelope-container {
+        width: 220px;
+        height: 160px;
+    }
+    
+    .flap {
+        border-left: 110px solid transparent;
+        border-right: 110px solid transparent;
+        border-bottom: 80px solid var(--color-envelope-accent);
+    }
+    
+    .invitation-container, .story-container {
+        padding: 1.5rem;
+    }
+    
+    .button {
+        padding: 10px 25px;
+        font-size: 0.8rem;
+    }
+    
+    .envelope-text {
+        font-size: 1.4rem;
+    }
+    
+    .story-text {
+        font-size: 1rem;
+    }
+    
+    .story-text::first-letter {
+        font-size: 2rem;
+    }
+    
+    .photo-frame {
+        border-width: 10px;
+    }
+    
+    .zoom-details h3 {
+        font-size: 1.2rem;
+    }
+}
+/* Ajuste para la posición del texto "Flora & Javier" en el sobre */
+.envelope-text {
+    /* Mantenemos las propiedades existentes */
+    position: relative;
+    top: 20px; /* Movemos el texto hacia abajo */
+    z-index: 1;
+    padding-bottom: 15px; /* Añadimos espacio debajo del texto */
+}
+
+/* Ajustamos la posición del flap del sobre para que no tape el texto */
+.flap {
+    top: -5px; /* Movemos un poco hacia arriba el flap */
+}
+/* Mejora de los botones de Zoom */
+.zoom-link a {
+    display: inline-block;
+    background-color: var(--color-secondary);
+    color: white;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 25px;
+    margin-left: 5px;
+    transition: var(--transition-main);
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.zoom-link a::before {
+    content: "→ ";
+    font-size: 1rem;
+}
+
+.zoom-link a:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: var(--color-dark);
+}
+
+/* Hacemos el texto de conexión más explícito */
+.zoom-details h3 {
+    color: var(--color-secondary);
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.zoom-details h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: var(--color-accent);
+}
