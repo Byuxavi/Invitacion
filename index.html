@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flora & Javier - Invitation de Mariage</title>
+    <title>Flora & Javier - Wedding Invitation</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 </head>
@@ -11,6 +11,7 @@
     <div class="language-selector">
         <button id="lang-fr" class="active">Français</button>
         <button id="lang-es">Español</button>
+        <button id="lang-en">English</button>
     </div>
     
     <div class="container">
@@ -19,9 +20,9 @@
             <div class="envelope">
                 <div class="flap"></div>
                 <div class="envelope-front">
-                    <div class="envelope-text" data-fr="Flora & Javier" data-es="Flora & Javier"></div>
+                    <div class="envelope-text" data-fr="Flora & Javier" data-es="Flora & Javier" data-en="Flora & Javier"></div>
                     <div class="envelope-stamp">
-                        <span data-fr="Avec Amour" data-es="Con Amor">Avec Amour</span>
+                        <span data-fr="Avec Amour" data-es="Con Amor" data-en="With Love">Avec Amour</span>
                     </div>
                 </div>
                 <div class="envelope-back"></div>
@@ -30,53 +31,60 @@
         
         <!-- Invitation Section -->
         <div class="invitation-container" id="invitation">
-            <img src="images/Invitationfrances.png" alt="Invitation de Mariage" class="invitation-image" id="invitation-img" data-fr-img="images/Invitationfrances.png" data-es-img="images/Invitationespañol.png">
-            <p class="invitation-text" data-fr="Nous voulions partager ce moment avec vous, même si nous sommes loin. Merci de faire partie de nos vies." data-es="Queríamos compartir este momento con ustedes, aunque estemos lejos. Gracias por ser parte de nuestras vidas.">
+            <img src="images/Invitationfrances.png" alt="Wedding Invitation" class="invitation-image" id="invitation-img" data-fr-img="images/Invitationfrances.png" data-es-img="images/Invitationespañol.png" data-en-img="images/Invitationenglish.png">
+            <p class="invitation-text" data-fr="Nous voulions partager ce moment avec vous, même si nous sommes loin. Merci de faire partie de nos vies." 
+            data-es="Queríamos compartir este momento con ustedes, aunque estemos lejos. Gracias por ser parte de nuestras vidas."
+            data-en="We wanted to share this moment with you, even if we are far away. Thank you for being part of our lives.">
                 Nous voulions partager ce moment avec vous, même si nous sommes loin. Merci de faire partie de nos vies.
             </p>
             <div class="zoom-details">
-                <h3 data-fr="Rejoignez-nous en ligne" data-es="Únase a nosotros en línea">Rejoignez-nous en ligne</h3>
+                <h3 data-fr="Rejoignez-nous en ligne" data-es="Únase a nosotros en línea" data-en="Join us online">Rejoignez-nous en ligne</h3>
                 
-                <!-- Enlace principal con botón mejorado -->
+                <!-- Main link with enhanced button -->
                 <div class="zoom-link">
-                    <span data-fr="Lien principal:" data-es="Enlace principal:">Lien principal:</span>
+                    <span data-fr="Lien principal:" data-es="Enlace principal:" data-en="Main link:">Lien principal:</span>
                     <a href="https://us05web.zoom.us/j/5109560892?pwd=CSiR0pkgsgSqc2eaUzgWXVupIjl2xz.1&omn=87087612550" target="_blank" class="zoom-button">Zoom</a>
                 </div>
                 
-                <p class="zoom-details-text" data-fr="ID de réunion: 510 956 0892 Code secret: 3005" data-es="ID de reunión: 510 956 0892<br>Código: 3005">
+                <p class="zoom-details-text" data-fr="ID de réunion: 510 956 0892 Code secret: 3005" 
+                data-es="ID de reunión: 510 956 0892<br>Código: 3005"
+                data-en="Meeting ID: 510 956 0892 Passcode: 3005">
                     ID de réunion: 510 956 0892 Code secret: 3005
                 </p>
                 
-                <!-- Enlace alternativo con botón mejorado -->
+                <!-- Alternative link with enhanced button -->
                 <div class="zoom-link backup">
-                    <span data-fr="Lien alternatif (si le premier ne fonctionne pas):" data-es="Enlace alternativo (si el primero no funciona):">Lien alternatif (si le premier ne fonctionne pas):</span>
+                    <span data-fr="Lien alternatif (si le premier ne fonctionne pas):" 
+                        data-es="Enlace alternativo (si el primero no funciona):"
+                        data-en="Alternative link (if the first one doesn't work):">Lien alternatif (si le premier ne fonctionne pas):</span>
                     <a href="https://us05web.zoom.us/j/5109560892?pwd=CSiR0pkgsgSqc2eaUzgWXVupIjl2xz.1&omn=85228737804" target="_blank" class="zoom-button">Zoom</a>
                 </div>
             </div>
             
-            <!-- Botón colocado correctamente dentro del contenedor de invitación -->
-            <button class="button" id="show-story" data-fr="Découvrir notre histoire" data-es="Conocer nuestra historia">Découvrir notre histoire</button>
+            <!-- Button correctly placed inside the invitation container -->
+            <button class="button" id="show-story" 
+                    data-fr="Découvrir notre histoire" 
+                    data-es="Conocer nuestra historia"
+                    data-en="Discover our story">Découvrir notre histoire</button>
         </div>
         
         <!-- Story Section -->
         <div class="story-container" id="story">
-            <p class="story-text" data-fr="Il y a plus d'un an, un Colombien et une Française se sont rencontrés sur l'île de Malte. Flora était en vacances, et moi je travaillais là-bas. Ce qui a commencé comme une rencontre fortuite s'est transformé en une histoire d'amour qui nous amène maintenant à célébrer notre mariage en France. Bien que la distance ne nous permette pas de vous embrasser en personne, nous vous sentons proche dans notre cœur." 
-            data-es="Hace más de un año, un colombiano y una francesa coincidieron en la isla de Malta. Flora viajaba de vacaciones, y yo trabajaba allá. Lo que empezó como un encuentro casual se convirtió en una historia de amor que ahora nos lleva a celebrar nuestro matrimonio en Francia. Aunque la distancia no nos permita abrazarlos en persona, los sentimos cerca en el corazón.">
+            <p class="story-text" 
+            data-fr="Un jour, un Colombien et une Française se sont rencontrés sur l'île de Malte. Flora était en vacances, et Javier travaillait là-bas. Ce qui a commencé comme une rencontre fortuite s'est transformée en une histoire d'amour qui nous amène maintenant à célébrer notre mariage en France. Bien que la distance ne nous permette pas de vous embrasser en personne, nous vous sentons proches dans notre cœur." 
+            data-es="Hace más de un año decidí salir de Colombia en busca de nuevas experiencias, y así fue como un colombiano y una francesa coincidieron en la isla de Malta. Flora estaba de vacaciones y yo trabajaba allí. Lo que comenzó como un encuentro casual se transformó en una historia de amor que hoy nos lleva a celebrar nuestro matrimonio en Francia. Aunque la distancia no nos permita abrazarlos en persona, los sentimos muy cerca de nuestro corazón."
+            data-en="One day, a Colombian guy and a French girl met on the island of Malta. Flora was on vacation, and Javier was working there. What began as a chance encounter has turned into a love story that now brings us to celebrate our wedding in France. Although the distance does not allow us to embrace you in person, we feel you close in our hearts.">
                 Il y a plus d'un an, un Colombien et une Française se sont rencontrés sur l'île de Malte. Flora était en vacances, et moi je travaillais là-bas. Ce qui a commencé comme une rencontre fortuite s'est transformé en une histoire d'amour qui nous amène maintenant à célébrer notre mariage en France. Bien que la distance ne nous permette pas de vous embrasser en personne, nous vous sentons proche dans notre cœur.
             </p>
             <div class="photo-frame">
-                <img src="images/WeddingInvitation_page-0002.jpg" alt="Notre histoire d'amour" class="photo-collage" id="collage-img" data-fr-img="images/WeddingInvitation_page-0002.jpg" data-es-img="/api/placeholder/700/500?text=Historia_ES">
+                <img src="images/WeddingInvitation_page-0002.jpg" alt="Our love story" class="photo-collage" id="collage-img" 
+                    data-fr-img="images/WeddingInvitation_page-0002.jpg" 
+                    data-es-img="images/WeddingInvitation_page-0002.jpg"
+                    data-en-img="images/WeddingInvitation_page-0002.jpg">
             </div>
             <p class="signature">— Flora & Javier</p>
         </div>
     </div>
-    
-    <div class="music-control" id="music-toggle">♪</div>
-    
-    <audio id="background-music" loop>
-        <!-- Aquí puedes agregar la URL de tu música de fondo -->
-        <source src="" type="audio/mpeg">
-    </audio>
     
     <script src="script.js"></script>
 </body>
